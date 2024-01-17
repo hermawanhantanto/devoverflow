@@ -68,7 +68,7 @@ const Answer = ({ questionId, question, userId }: Props) => {
   const handleAnswerAI = async () => {
     try {
       setIsSubmittingAI(true);
-      const response = await fetch(`http://localhost:3000/api/chatgpt`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}`, {
         method: "POST",
         body: JSON.stringify({ question }),
       });
