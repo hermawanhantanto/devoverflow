@@ -68,10 +68,13 @@ const Answer = ({ questionId, question, userId }: Props) => {
   const handleAnswerAI = async () => {
     try {
       setIsSubmittingAI(true);
-      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}`, {
-        method: "POST",
-        body: JSON.stringify({ question }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/chatgpt`,
+        {
+          method: "POST",
+          body: JSON.stringify(question),
+        }
+      );
       const body = await response.json();
       if (editorRef.current) {
         const editor = editorRef.current as any;
@@ -111,7 +114,7 @@ const Answer = ({ questionId, question, userId }: Props) => {
           <FormField
             control={form.control}
             name="answer"
-            render={({ field }) => (
+            render={({ field }: any) => (
               <FormItem className="flex w-full flex-col gap-3">
                 <FormControl className="mt-3.5">
                   <Editor

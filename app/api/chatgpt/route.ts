@@ -1,10 +1,9 @@
-import { stripHtmlTags } from "@/lib/utils";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
     const { question } = await request.json();
-   
+
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -21,10 +20,7 @@ export async function POST(request: Request) {
           },
           {
             role: "user",
-            content: `Tell me ${
-              // @ts-ignore
-              stripHtmlTags(question)
-            }`,
+            content: `Tell me ${question}`,
           },
         ],
       }),

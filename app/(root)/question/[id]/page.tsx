@@ -7,7 +7,11 @@ import RenderTag from "@/components/shared/RenderTag";
 import Votes from "@/components/shared/Votes";
 import { getQuestionById } from "@/lib/actions/question.action";
 import { getUserById } from "@/lib/actions/user.action";
-import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
+import {
+  formatAndDivideNumber,
+  getTimestamp,
+  stripHtmlTags,
+} from "@/lib/utils";
 import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
@@ -117,7 +121,7 @@ const QuestionDetail = async ({ params, searchParams }: Props) => {
       <Answer
         userId={JSON.stringify(user._id)}
         questionId={JSON.stringify(question._id)}
-        question={question.content}
+        question={stripHtmlTags(question.content)}
       />
     </>
   );
