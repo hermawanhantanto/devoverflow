@@ -51,5 +51,8 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "5.3.3",
     "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/prismjs": "^1.26.3"
   }
 }
