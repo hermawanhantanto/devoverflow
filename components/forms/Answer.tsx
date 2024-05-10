@@ -125,7 +125,7 @@ const Answer = ({ questionId, question, userId }: Props) => {
                     }}
                     onBlur={field.onBlur}
                     onEditorChange={(content) => field.onChange(content)}
-                    initialValue={field.value}
+                    initialValue=""
                     init={{
                       height: 350,
                       menubar: false,

@@ -254,8 +254,7 @@ export async function deleteQuestion(params: DeleteQuestionParams) {
     connectToDatabase();
 
     const { questionId, path } = params;
-    const question = await Question.findById(questionId);
-    if (!question) throw new Error("Question not found");
+
     await Answer.deleteMany({ question: questionId });
     await Interaction.deleteMany({ question: questionId });
     const tags = await Tag.find({ questions: { $in: [questionId] } });
@@ -274,6 +273,8 @@ export async function deleteQuestion(params: DeleteQuestionParams) {
       { saved: { $in: [questionId] } },
       { $pull: { saved: questionId } }
     );
+
+    await Question.findByIdAndDelete(questionId);
 
     revalidatePath(path);
   } catch (error) {
